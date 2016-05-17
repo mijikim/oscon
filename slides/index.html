@@ -1,0 +1,1725 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Hands-on Workshop</title>
+
+	<meta name="description" content="Continuously Delivery Microservices">
+	<meta name="author" content="Clarence Bakirtzidis, Kiruthika Samapathy">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/thoughtworks.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="footer">
+			Copyright (c) ThoughtWorks 2015. Provided for personal use only and not to be copied or distributed.
+		</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+
+			<section class="title">
+				<h1>Hands-On Workshop</h1>
+				<h3>Continuously Delivering Microservices</h3>
+			</section>
+
+			<section>
+					<img width="1400" data-src="images/Rules/Rules.001.jpeg" alt="Rules" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons001.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons002.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons003.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons004.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons005.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+					<img width="1400" data-src="images/Reasons/Reasons006.jpeg" alt="Reasons to move" style="border:0">
+		</section>
+
+		<section>
+			<div>
+				<h2>Microservices References</h2>
+				<ul>
+					<li>
+						<span><a href="http://shop.oreilly.com/product/0636920033158.do" target="_blank">Building Microservices (Book)</a>, Sam Newman</span>
+						<br/>
+						<img style="display: block; margin-left: auto; margin-right: auto;" width="240" data-src="images/aa-book-building-microservices.jpg" alt="Building Microservices" style="border: 0">
+					</li>
+					<li><a href="https://www.youtube.com/watch?v=UfQTNtbq170" target="_blank">Goldilocks and the three microservices (Video)</a>, Charles Haynes</li>
+					<li><a href="https://blog.docker.com/2014/12/dockercon-europe-keynote-state-of-the-art-in-microservices-by-adrian-cockcroft-battery-ventures/" target="_blank">State of the Art in Microservices (Video, Slides)</a>, Adrian Cockcroft</li>
+					<li><a href="http://martinfowler.com/articles/microservices.html" target="_blank">Microservices (Article)</a>, Martin Fowler and James Lewis</li>
+					<li><a href="http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html" target="_blank">Microservices - Not A Free Lunch! (Blog)</a>, Benjamin Wootton</li>
+				</ul>
+			</div>
+		</section>
+
+			<section>
+				<h2> Topics </h2>
+				<table style="font-size:0.8em">
+					<thead class="purple">
+						<tr>
+							<th>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong><a href="#/getting-started">Getting Started</a></strong></td>
+							<td>Check your workshop VM is configured properly</td>
+						</tr>
+						<tr>
+							<td><strong><a href="#/module-1">Module 1</a></strong></td>
+							<td>Introduction to the Monolith and Continuous Delivery</td>
+						</tr>
+						<tr>
+							<td><strong><a href="#/module-2">Module 2</a></strong></td>
+							<td>Meet our first microservice and Docker</td>
+						</tr>
+						<tr>
+							<td><strong><a href="#/module-3">Module 3</a></strong></td>
+							<td>Our second microservice and Consumer-Driven Contracts (CDCs)</td>
+						</tr>
+						<tr>
+							<td><strong><a href="#/wrap-up">Wrap up</a></strong></td>
+							<td>Service discovery, operational concerns and future trends</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section class="title">
+				<h1>Setup Your Box</h1>
+				<h3>To Build, Test, Run and Deploy Microservices using Docker</h3>
+			</section>
+
+			<section>
+				<h2>Setup workshop VM<br>Install Prerequisites from USB drive</h2>
+				<br>
+				<ul>
+					<li>Install <code>VirtualBox-5.0.14</code> from <code>installers</code> directory</li>
+					<li>Install <code>vagrant-1.8.1</code> from <code>installers</code> directory</li>
+					<li>If you are running <strong>Windows:</strong></li>
+					<ul>
+						<li>Install <code>Git-2.7.1</code> from <code>installers</code> directory.
+							<li>Use default locations suggested by installers.</li>
+							<li>Restart your machine when requested by installers.</li>
+					</ul>
+					<li>Copy content of usb-stick to your computer
+						<br> </li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Open up the slides</h2>
+				<br>
+				<ul>
+					<li><span style="color: red">Important*</span> - If using Windows, unzip from Git Bash</li>
+					<br>
+					<li>Open file <code>index.html</code> found in <code>slides</code> directory on your computer
+						<br>
+					</li>
+					<br>
+					<li>You should see these instructions in your browser
+						<br>and be able to copy and paste commands if needed</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Run the Workshop VM</h2>
+				<br>
+				<ul>
+					<li>Start up the workshop VM
+						<br> from <code>workshop-dist/box</code> directory on your machine</li>
+					<pre><code class="sh">$ cd workshop-dist/box
+workshop-dist/box$ vagrant box add workshop workshop.box
+workshop-dist/box$ vagrant up
+workshop-dist/box$ vagrant ssh</code></pre>
+					<li>If you are using Windows run <code>Git Bash</code></li>
+					<pre><code content-trim class="sh">$ cd 'workshop-dist\box\'
+workshop-dist\box$ vagrant box add workshop workshop.box
+workshop-dist\box$ vagrant up
+workshop-dist\box$ vagrant ssh</code></pre>
+				</ul>
+			</section>
+
+			<section class="title">
+				<h1>Hands-on<br> Sessions Overview</h1>
+				<h3>Introduction of your playground and the rules</h3>
+			</section>
+
+			<section>
+				<h2>The Playground Overview</h2>
+				<img width="960" data-src="images/aa-overview-playground.jpg" alt="playground overview" style="border:0">
+			</section>
+
+			<section>
+				<h2>Glossary</h2>
+				<table style="font-size:0.7em">
+					<thead class="purple">
+						<tr>
+							<th>
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><pre><code class="shell">$ vagrant up</code></pre> </td>
+							<td>Command to run on your machine from <code>workshop-dist/box</code> directory to start up workshop VM</td>
+						</tr>
+						<tr>
+							<td><pre><code class="shell">$ vagrant ssh</code></pre> </td>
+							<td>Command to run on your machine from <code>workshop-dist/box</code> directory to log into workshop vm. This should be called after starting the vm. All consequent commands run on the workshop VM</td>
+						</tr>
+						<tr>
+							<td><pre><code class="shell"> vagrant@workshop:~$</code></pre> </td>
+							<td>Prompt displayed when running commands on microservices VM</td>
+						</tr>
+						<tr>
+							<td><code>/home/vagrant/topics/{state}/{topic_name}</code></td>
+							<td>Topic builder scripts for start/finish state on workshop VM</td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code class="shell">~$ cd /home/vagrant/topics/{state}/{topic_name}</code></pre>
+								<pre><code class="shell">{topic_name}$ ./up.sh</code></pre> </td>
+							<td>Command to configure a topic in the start or finish state on workshop VM</td>
+						</tr>
+						<tr>
+							<td><code class="sh">/home/vagrant/workspace/...</code></td>
+							<td>Source code repositories on the workshop VM</em>
+							</td>
+						</tr>
+						<tr>
+							<td><code class="sh">{dir-on-your-machine}/my-workspace/...</code></td>
+							<td>Source code repositories on your machine. This directory is synced with workshop VM</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>Git repositories on your VM</h2>
+				<ul>
+					<li>Some exercises will require modifying files in your local <a href="http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank">Git</a> workspaces</li>
+					<li>On your VM these will be under: <pre><code>/home/vagrant/workspace/</code></pre></li>
+					<li>On your computer these will be under: <pre><code>{dir-on-your-machine}/my-workspace/</code></pre></li>
+					<li>Always commit and push changes from your VM (not from your computer)</li>
+					<li>Example of making changes in the VM terminal:<pre><code class="sh">echo "Hello world" > my-new-file.txt
+git status		# See new/modified files
+git add my-new-file.txt
+git commit -m "Some useful message about the change"
+git push			# Submit change to the remote repository (hosted your VM)</code></pre></li>
+					<li>When you push changes, Go-CD will detect the change a kick off a build (it periodically polls the git repositories for changes)</li>
+				</ul>
+			</section>
+
+			<section id="getting-started" class="title">
+				<h1>Getting Started</h1>
+				<h3>Check your workshop VM is configured properly</h3>
+			</section>
+
+			<section>
+				<h2>Run the getting started topic </h2>
+				<br>
+				<ul>
+					<li>Log into workshop VM
+						<br>
+						<li>If you are using Windows run <code>Git Bash</code></li>
+						<pre><code>workshop-dist/box$ vagrant ssh</code></pre></li>
+					<br>
+					<li>Run the <code>getting_started</code> topic script
+						<br>
+						<pre><code>vagrant@workshop:~$ cd ~/topics/start/getting_started</code></pre>
+						<pre><code>vagrant@workshop:~$ ./up.sh</code></pre>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Verify CD Pipeline<br/>is working</h2>
+				<ul style="list-style-type: none;">
+					<li>Open a browser to the Go-CD(*) dashboard
+						<br/>on your machine:
+						<a href="http://localhost:8153" target="_blank"><code>http://localhost:8153</code></li></a>
+				</ul>
+				<div>
+					<img width="680" data-src="images/aa-getting-started-pipeline-anno.jpg" alt="go-cd dashboard - getting started" style="border:0" />
+					<span><small style="padding-top : 20px">(*) Go-CD is an open-source CI build server created by ThoughtWorks Studios</small></span>
+				</div>
+				</ul>
+			</section>
+
+			<section>
+				<h2>View the build results</h2>
+				<ul>
+					<li>Look for "<code>Hello, world</code>" in the console output:</li>
+					<ol>
+						<li>Click on the <strong>Commit</strong> stage (<span style="color: green">green</span> bar) in the pipeline</li>
+						<li>Click on the <strong>Build</strong> job in the left pane</li>
+						<li>Select <strong>Console</strong> tab</li>
+						<li>Examine the output for "Hello, world"</li>
+					</ol>
+					<li>Your VM is now working properly</li>
+					<li>For more detailed instructions: <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/getting_started/README.html">README</a> </li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>View the build results</h2>
+				<div>
+					<img width="520" data-src="images/aa-getting-started-verify1.jpg" alt="go-cd dashboard - verify 1" style="border:0" />
+					<br/>
+					<img width="520" data-src="images/aa-getting-started-verify2.jpg" alt="go-cd dashboard - verify 2" style="border:0" />
+				</div>
+			</section>
+
+			<section>
+				<h2>View the build results</h2>
+				<div>
+					<img width="760" data-src="images/aa-getting-started-verify3.jpg" alt="go-cd dashboard - verify 3" style="border:0" />
+				</div>
+			</section>
+
+			<!-- Module 1 -->
+
+			<section id="module-1" class="title">
+				<h1>Module 1</h1>
+				<h3>Intro to the Monolith and Continuous Delivery with Go-CD</h3>
+			</section>
+
+			<section class="title">
+				<h1>Workshop Journey</h1>
+				<h3>Why are we here? What are we going to do?</h3>
+			</section>
+
+			<section>
+				<h2>Our journey today... </h2>
+				<br>
+				<ul>
+					<li>Monolithic shop app</li>
+					<li>Deploy shop app</li>
+					<li>Extract Review Service</li>
+					<li>Extract Catalogue Service</li>
+					<li>Consumer Driven Contracts</li>
+				</ul>
+			</br>
+			</section>
+
+			<section>
+				<h2>Module 1 - Overview</h2>
+				<p style="text-align: left">
+					This module uses the <code>shop-app</code> in it's monolithic form, i.e. no external services used. You will have to build, test, package and deploy the shop-app via a delivery pipeline.
+					<br/>
+					<br/> Once deployed, you can access the application on your host machine at:
+					<a href="http://localhost:8090/" target="_blank"><code>http://localhost:8090</code></a>
+				</p>
+				<br/>
+				<h4>You will learn about:</h4>
+				<ul>
+					<li>Continuous Delivery (CD) pipelines</li>
+					<li>Typical stages in a CD pipeline</li>
+					<li><a href="http://www.thoughtworks.com/products/go-continuous-delivery" target="_blank">Go-CD</a> as a tool for implementing a delivery pipeline</li>
+					<li>Become familiar with the Musik shop app</li>
+					<li>Build artifacts and tagging them with a build number</li>
+				</ul>
+			</section>
+
+			<section>
+				<div>
+					<h2>Continuous Delivery</h2>
+				</div>
+				<div style="text-align: left; font-size: 1em"><em>"...teams continuously deliver new versions of software to production by decreasing the cycle time
+						between an idea and usable software through the automation of the entire delivery system:
+						build, deployment, test, and release."</em> (<a href="http://refcardz.dzone.com/refcardz/continuous-delivery-patterns" target="_blank">DZone Refcardz: Continuous Delivery</a>)</div>
+				<br/>
+				<ol>
+					<li>Continuous Delivery (CD) takes Agile and Continuous Integration further by enabling frequent, automated, repeatable, low-risk delivery into Production ("the last mile")</li>
+					<li>The CD pipeline is a key construct used to automate the delivery process</li>
+					<li>Software is always in a releaseable state - each commit is a release candidate until proven otherwise</li>
+					<li>Demonstates real progress - no delayed integrations; visibility</li>
+					<li>Exposes bottlenecks and other inefficiencies</li>
+					<li>Provides rapid feedback at all stages of the delivery process</li>
+					<li>Fits well into distributed team structures</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Continuous Delivery: Pipeline</h2>
+				<img width="960" data-src="images/aa-cd-pipeline.jpg" alt="monolithic app overview" style="border:0" />
+				<small><em>Image credit: Continous Delivery (book), Jez Humble and David Farley</em></small>
+			</section>
+
+			<section>
+				<div>
+					<h2>Continuous Delivery: References</h2>
+					<ul>
+						<li>
+							<span><a href="http://www.amazon.com/dp/0321601912" target="_blank">Continuous Delivery (Book)</a>, Jez Humble and David Farley</span>
+							<br/>
+							<img style="display: block; margin-left: auto; margin-right: auto;" width="240" data-src="images/aa-module1-cd-book.jpg" alt="Continuous Delivery Book" style="border: 0">
+						</li>
+						<li><a href="http://refcardz.dzone.com/refcardz/continuous-delivery-patterns" target="_blank">DZone Refcardz: Continuous Delivery</a></li>
+						<li><a href="http://info.thoughtworks.com/putting-continuous-delivery-into-practice-slideshare.html?aliId=5510306" target="_blank">Implementing Continuous Delivery (ThoughtWorks)</a> - Slide series</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<h2>Looking at the CD build pipeline</h2>
+				<br>
+				<ul>
+					<li><a href="http://localhost:8153" target="_blank" title="http://localhost:8153">http://localhost:8153</a></li>
+					<img width="" data-src="images/aa-module1-pipeline-deploy.jpg" alt="deploy pipeline" style="border:0" />
+			</section>
+			</ul>
+			</section>
+			<section>
+				<h2>Meet our monolith</h2>
+				<br>
+				<ul>
+					<li>Our monolithic app is called <strong>Musik shop</strong></li>
+					<li>Source code is located here:
+						<br/>
+						<pre><code>vagrant@workshop:~$ cd ~/workspace/shop-app </code></pre>
+					</li>
+
+					<li>Viewing the app in browser:
+						<br/>
+						<a href="http://localhost:8090" target="_blank">http://localhost:8090</a>
+					</li>
+				</ul>
+				<br>
+			</section>
+
+			<section>
+				<h2>Musik Shop Data Model</h2>
+				<img data-src="images/new-releases.jpg" alt="new releases data model" style="border:0">
+			</section>
+
+			<section>
+				<h2>Application Overview</h2>
+				<img width="920" data-src="images/aa-monolithic-app-overview.jpg" alt="monolithic app overview" style="border:0">
+				<aside class="notes">
+					You can also use the host-only network address of 192.168.33.10 instead of localhost. We use port-forwarding in the Vagrantfile to allow use of localhost for some ports.
+				</aside>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>Challenge</h2>
+				</div>
+				<br>
+				<h2>Tag app with build number</h2>
+				<ol>
+					<li>View Module 1 <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/module1/README.html">README</a> for detailed instructions </li>
+					<li>We want traceability from our deployed apps/services to the build that produced the artifacts</li>
+					<li>In your VM terminal, check running version of shop app:
+						<pre><code>docker ps	 # ==> You will see tag 'latest'</code></code></pre></li>
+					<li>Configure <code>ShopApp - Package</code> stage to pass in build number to package script</li>
+					<li><strong>Hint:</strong> View console tab from previous build to identity available Go-CD environment variables</li>
+					<li>Trigger a build and deploy it</li>
+					<li>Now verify correctly tagged running version of app is running:
+						<pre><code>docker ps	 # ==> You will see tag with builder number</code></code></pre>
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>(Optional) Challenge</h2>
+				</div>
+				<br>
+				<h2>Show upstream build number in Deploy pipeline build label
+					</h2>
+				<br>
+				<ol>
+					<li>Make it easier to see which build of the app has been deployed</li>
+					<li>Click the 'gear' icon for the <code>ShopApp-Deploy</code> pipeline</li>
+					<li>In <code>Generial Options / Basic Settings</code>, edit the <code>Label Template</code> field</li>
+					<li><strong>Hint:</strong> Try <code>${ShopApp}-${COUNT}</code></li>
+					<li>See page <a href="http://www.go.cd/documentation/user/current/configuration/admin_use_custom_pipeline_label.html" target="_blank">Use a custom pipeline label</a> (external link)</li>
+					<li>Redploy the app to see the label take effect</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Looking at the CD build pipeline</h2>
+				<br>
+				<ul>
+					<li><a href="http://localhost:8153" target="_blank" title="http://localhost:8153">http://localhost:8153</a></li>
+					<img width="" data-src="images/aa-module1-pipeline-label.jpg" alt="deploy pipeline with custom label" style="border:0" />
+			</section>
+			</ul>
+			</section>
+
+			<section>
+				<h2>View the Pipeline Value-Stream Map</h2>
+				<br>
+				<ul>
+					<li><a href="http://localhost:8153" target="_blank" title="http://localhost:8153">http://localhost:8153</a></li>
+					<img width="" data-src="images/aa-module1-pipeline-vsm.jpg" alt="deploy pipeline vsm" style="border:0" />
+			</section>
+			</ul>
+			</section>
+
+			<section>
+				<div>
+					<h2>Module 1 - Wrap-up</h2>
+				</div>
+				<ol>
+					<li>Introduced the monolithic web app "Musik Shop"</li>
+					<li>Built a basic CD pipeline to build, test, package and deploy the "Musik Shop" app</li>
+					<li>Reviewed basic Continous Delivery concepts</li>
+					<li>Previewed application deployment to Docker</li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2>Module 1 - Tips and Advice</h2>
+				</div>
+				<ol>
+					<li>Use CD Pipelines to automate your build process and provide feedback on production readiness of software
+					</li>
+					<li>Model your build process as a series of stages for improved feedback</li>
+					<li>Provide scripts for building, testing, packaging and deploying your apps:
+						<ul>
+							<li>Store these with your app code</li>
+							<li>Call them from your CI/CD tool</li>
+						</ul>
+					</li>
+					<li>Build artifacts once and use them in downstream stages / pipelines</li>
+					<li>Always tag your build artifacts with a build number</li>
+					<li>Extend your CD pipeline to automate deployment into your environments</li>
+					<li>Monolithic apps can be easy to build and deploy as they have less moving parts</li>
+				</ol>
+			</section>
+
+			<section id="module-2" class="title">
+				<h1>Module 2</h1>
+				<h3>Meet our first microservice and Docker</h3>
+			</section>
+
+			<section>
+				<h2>Our journey today... </h2>
+				<br>
+				<ul>
+					<li>Monolithic shop app</li>
+					<li>Deploy shop app</li>
+					<li>Extract Review Service</li>
+					<li>Extract Catalogue Service</li>
+					<li>Consumer Driven Contracts</li>
+				</ul>
+			</br>
+			</section>
+
+			<section>
+				<h2>Module 2 - Overview</h2>
+				<p style="text-align: left">
+					In this module, we extract the album review functionality from the monolithic shop-app into a separate service called the <code>review</code> service. You will be provided with the Go-CD build and deploy pipelines for both the <code>shop-app</code>					and <code>review</code> service.
+					<br/>
+					<br/> Once deployed, you can access the application on your host machine at:
+					<a href="http://localhost:8090/" target="_blank"><code>http://localhost:8090</code></a>
+				</p>
+				<br/>
+				<h4>You will learn about:</h4>
+				<ul>
+					<li>Introduction to Microservices</li>
+					<li>Introduction to Docker</li>
+					<li>Basics of working with Docker from the command-line</li>
+					<li>Become familiar with the <code>review</code> service</li>
+					<li>Exploring <code>review</code> service API documentation</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Meet our first microservice:<br/>Review</h2>
+				<br>
+				<ul>
+					<li>Our first extracted service is called <code>review</code> service
+					</li>
+					<li>Source code is located here:
+						<br/>
+						<pre><code>vagrant@workshop:~$ cd ~/workspace/review </code></pre>
+					</li>
+			</section>
+
+			<section>
+				<h2>Deploy Review Service in CI pipeline</h2>
+				<ul>
+					<li><a href="http://localhost:8153" target="_blank" title="http://localhost:8153">http://localhost:8153</a></li>
+					<img data-src="images/aa-module2-pipeline-start.jpg" alt="monolithic app overview" style="border:0">
+					<li>Viewing the service API docs in browser:
+						<br/>
+						<a href="http://localhost:8082/api-docs" target="_blank">http://localhost:8082/api-docs</a>
+					</li>
+			</section>
+			</ul>
+			</section>
+
+			<section>
+				<h2>Application Overview</h2>
+				<img data-src="images/aa-module2-setup.jpg" alt="monolithic app overview" style="border:0">
+				<aside class="notes">
+					You can also use the host-only network address of 192.168.33.10 instead of localhost. We use port-forwarding in the Vagrantfile to allow use of localhost for some ports.
+				</aside>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>Challenge - Part 1/3</h2>
+				</div>
+				<br>
+				<h2>Update monolithic shop app to use review service</h2>
+				<ol>
+					<li>View Module 2 <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/module2/README.html">README</a> for detailed instructions </li>
+					<li>Navigate to the <code>shop-app</code> code in your workspace:
+						<pre><code>vagrant@workshop:~$ cd ~/workspace/shop-app</code></pre>
+					</li>
+					<li>Edit the file: <code>NewReleasesClient.java</code><pre><code>vagrant@workshop:shop-app$ nano src/main/java/microservices/shop/core/NewReleasesClient.java</code></pre></li>
+					<li>Search for the <code>TODO</code> comment</li>
+					<li>Change the code so that it retrieves the star ratings via the <code>review</code> service</li>
+				</ol>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>Challenge - Part 2/3</h2>
+				</div>
+				<br>
+				<h2>Update monolithic shop app to use review service<br>
+					</h2>
+				<ol>
+					<li>Edit the <code>deploy.sh</code> script to <a href="https://docs.docker.com/userguide/dockerlinks/" target="_blank">link</a> the <code>shop-app</code> container to the review container:
+						<pre><code>vagrant@workshop:shop-app$ nano scripts/deploy.sh</code></pre></li>
+					<li>Search for the <code>TODO</code> comment</li>
+					<li>Edit the line starting with <code>docker run</code> to look like this:
+						<pre><code>docker run ... --link review:review ...</code></pre></li>
+				</ol>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>Challenge - Part 3/3</h2>
+				</div>
+				<h2>Update monolithic shop app to use review service</h2>
+				<ol>
+					<li>Commit and push your changes to trigger a new build</li>
+					<li>Wait until your builds have completed and are green</li>
+					<li>Deploy your <code>review</code> service from the <code>ReviewService-Deploy</code> pipeline (*)</li>
+					<li>Then deploy your <code>shop-app</code> from the <code>ShopApp-Deploy</code> pipeline</li>
+					<li>Can you see the star ratings in the <code>shop-app</code>?
+						<br/>Refresh the app in your browser: <a href="http://localhost:8090/" target="_blank">http://localhost:8090/</a></li>
+					<small style="padding-top : 20px">(*) Due to limitations of Docker Links, there is some ordering imposed on the deployment of our app and services.	This will be addressed in Module 4.</small>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker Overview</h2>
+				</div>
+				<div style="text-align: left"><em>"Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. Consisting of Docker Engine, a portable, lightweight runtime and packaging tool, and Docker Hub"</em> (<a href="https://www.docker.com/whatisdocker/"
+							target="_blank">docker.com/whatisdocker</a>)</div>
+				<br/>
+				<div style="text-align: left"><strong>Characteristics:</strong></div>
+				<ol>
+					<li>Lightweight virtualisation, container-based (e.g. LXC)</li>
+					<li>Fast deployment</li>
+					<li>Portable applications and services: Build once, run anywhere (*)</li>
+					<li>Container resource isolation: CPU, memory, block I/O and network</li>
+					<li><a href="https://docs.docker.com/introduction/understanding-docker/" target="_blank">Docker images</a> make use of union file systems to save space</li>
+					<li>Docker ecosystem includes tools like Docker Machine, Docker Compose, and Docker Swarm</li>
+					<li>Lots of third-party software emerging: <a href="http://mesos.apache.org/" target="_blank">Mesos</a> / <a href="https://mesosphere.github.io/marathon/" target="_blank">Marathon</a>, <a href="http://kubernetes.io/" target="_blank">Kubernetes</a>,
+						<a href="https://coreos.com/" target="_blank">CoreOS</a>, <a href="http://deis.io/" target="_blank">Deis</a>, etc.</li>
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker on your Computer</h2>
+					<img data-src="images/aa-docker-your-computer.jpg" alt="Docker on your computer" style="border:0">
+				</div>
+				<aside class="notes">
+					Normally, if you were running Docker on a Linux host you would not need the Guest OS and Hypervisor pieces. However, since the workshop VM includes Go-CD, Gitolite (git repos) and cached Docker containers you will need to run VirtualBox with the workshop
+					VM even on Linux.
+				</aside>
+			</section>
+
+			<section>
+				<div>
+					<h2>Dockerised Services on your Workshop VM</h2>
+					<img width="920" data-src="images/aa-module2-dockerised-services.jpg" alt="Docker on your computer" style="border:0">
+				</div>
+				<aside class="notes">
+					If you restart the review service then the link is maintained. However, if you destory and create a new review service container (.e.g after a new deploy) then the container IP will likely change and the link will be broken until you restart the shop
+					container. One workaround is to use an Ambassador Container (https://docs.docker.com/articles/ambassador_pattern_linking/).
+				</aside>
+			</section>
+
+			<section>
+				<h2>Packaging an app/service generates a Docker image</h2>
+				<ol>
+					<li>We are using a Maven plugin to build Docker images</li>
+					<pre><code>vagrant@workshop:~$ less ~/workspace/review/pom.xml</code></pre>
+					<pre><code content-trim class="pom.xml"><plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>docker-maven-plugin</artifactId>
+	<version>0.1.1</version>
+	<configuration>
+		<imageName>review</imageName>
+		<baseImage>java:8-jre</baseImage>
+		<entryPoint>["java", "-jar", "/${project.build.finalName}.jar",
+			"server","config.yml"]</entryPoint>
+		<exposes>
+			<expose>8080</expose>
+			<expose>8081</expose>
+		</exposes>
+	...
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>build</goal>
+			</goals>
+		</execution>
+</executions>
+</plugin>
+</code>
+</pre>
+					</li>
+					<li>Docker has built in support for building images via <a href="https://docs.docker.com/reference/builder/" target="_blank">Dockerfiles</a>:
+						<li>E.g. In a directory with a file called <code>Dockerfile</code>
+							<br/>
+							<pre><code>docker build -t review .</code></pre></li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Running a service starts a container from the Docker image</h2>
+				<br>
+				<ol>
+					<li>See one of the app/services <code>deploy.sh</code> files, e.g.
+						<pre><code content-trim class="sh">vagrant@workshop:~$ less ~/workspace/review/scripts/deploy.sh</code></pre>
+						<pre><code content-trim class="sh">app_name=${2:-review} port=${3:-8082} image_and_tag=... # e.g. review:9...
+# 3. Start new Container
+docker run -d -p ${port}:${port} --name ${app_name} --hostname ${app_name} "${image_and_tag}"</code></pre></li>
+					<li>Check running containers:
+						<pre><code content-trim class="sh">vagrant@workshop:~$ docker ps
+CONTAINER ID		IMAGE		COMMAND			 STATUS		 NAMES
+dad11c8fcb54		shop:61		"java -jar /shop-0.0	 Up 24 hours	 shop-app
+836a4e00261a		review:9	"java -jar /review-0	 Up 24 hours	 review</code></pre></li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker References</h2>
+					<ul>
+						<li>
+							<span><a href="http://www.dockerbook.com/" target="_blank">The Docker Book (eBook)</a>, James Turnbull</span>
+							<br/>
+							<img style="display: block; margin-left: auto; margin-right: auto;" width="240" data-src="images/aa-book-thedockerbook.jpeg" alt="The Docker Book" style="border: 0">
+							</a>
+						</li>
+						<li><a href="https://www.youtube.com/watch?v=Q5POuMHxW-0" target="_blank">Introduction to Docker (Video)</a> - Solomon Hykes</li>
+						<li><a href="https://docs.docker.com/userguide/" target="_blank">Docker User Guide</a> - Getting Started</li>
+						<li><a href="http://docs.docker.com/reference/commandline/cli/" target="_blank">Docker Command Line</a> - Command-line reference</li>
+						<li><a href="https://docs.docker.com/reference/builder/" target="_blank">Dockerfile Reference</a> - Building Docker images</li>
+						<li><a href="https://github.com/spotify/docker-maven-plugin" target="_blank">spotify/docker-maven-plugin (repo)</a> - A maven plugin for docker</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2>Challenge</h2>
+				</div>
+				<br/>
+				<h2>Docker from the command-line</h2>
+				<ol>
+					<li>Refer to <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/module2/README.html">README</a> for detailed instructions </li>
+					<li>List Docker images on your VM</li>
+					<li>View the build history for the <code>review</code> image</li>
+					<li>Which containers are currently running?</li>
+					<li>Which ports is the <code>review</code> service listening on?</li>
+					<li>Which ports are forwarded to the host for the review service?</li>
+					<li>View logs for one of the running containers</li>
+					<li>Open a terminal inside a running container. Which processed are running?</li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2> Module 2 - Wrap-up </h2>
+				</div>
+				<ol>
+					<li>Extracted album star ratings functionality into the <code>review</code> service</li>
+					<li>Quick intro to Microservices and some characteristics</li>
+					<li>Quick overview of Docker</li>
+					<li>Examined Docker setup on your computer</li>
+					<li>Examined packaging services in Docker images with Maven</li>
+					<li>Examined running containers using Docker images</li>
+					<li>Explored Docker from the command-line</li>
+					<li>Built a Docker image from a Dockerfile</li>
+					<li>Created a simple time server using the tiny <code>busybox</code> image</li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2>Module 2 - Tips and Advice</h2>
+					<ol>
+						<li>It's ok to start with a monolith then extract services once you understand your business domain and bounded contexts</li>
+						<li>Try to keep your Docker images small (e.g. base them on busybox, alpine, or debian)</li>
+						<li>Don't use Docker containers like full blown VMs - Run a single process in each Docker container</li>
+						<li>Use Docker links to communicate between containers (on the same host)</li>
+						<li>Log to STDOUT, STDERR not to files</li>
+						<li>Configure apps / services via ENV variables or use an external config store (e.g. etcd, consul)</li>
+						<li>Use <a href="https://docs.docker.com/articles/host_integration/" target="_blank">OS service scripts</a> to keep your containers running and to start them on boot (e.g. Upstart, Systemd) </li>
+					</ol>
+			</section>
+
+			<!-- Module 3 -->
+
+			<section id="module-3" class="title">
+				<h1>Module 3</h1>
+				<h3>Our second microservice and Consumer-driven Contracts</h3>
+			</section>
+
+			<section>
+				<img width="1400" data-src="images/exercise/exercise.001.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.002.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.003.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.004.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.005.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.006.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.007.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.008.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.009.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.010.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.011.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.012.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.013.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.014.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.015.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.016.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.017.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.018.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.019.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.020.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.021.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.022.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+	<section>
+				<img width="1400" data-src="images/exercise/exercise.023.jpeg" alt="Exercise" style="border:0">
+	</section>
+
+			<section>
+				<h2>Module 3 - Overview</h2>
+				<p style="text-align: left">
+					In this module, we extract the album catalogue functionality from the <code>shop-app</code> into a separate service called the <code>catalogue</code> service. You will be provided with the Go-CD build and deploy pipelines for the <code>shop-app</code>,
+					<code>review</code> and <code>catalogue</code> services. We will also run through a DDD exercise.
+					<br/>
+					<br/> Once deployed, you can access the application on your host machine at:
+					<a href="http://localhost:8090/" target="_blank"><code>http://localhost:8090</code></a>
+				</p>
+				<br/>
+				<h4>You will learn about:</h4>
+				<ul>
+					<li>Domain Driven Design</li>
+					<li>Structuring build and deploy pipelines to support autonomous teams and service deployment</li>
+					<li>Consumer-driven contracts</li>
+				</ul>
+			</section>
+						<section>
+								<h2>Our journey today... </h2>
+								<br>
+								<ul>
+									<li>Monolithic shop app</li>
+									<li>Deploy shop app</li>
+									<li>Extract Review Service</li>
+									<li>Extract Catalogue Service</li>
+									<li>Consumer Driven Contracts</li>
+								</ul>
+							</br>
+						</section>
+
+			<section>
+				<h2> Meet our second microservice:<br/>Catalogue </h2>
+				<ul>
+					<li>Our second extracted service is called <code>Catalogue</code> service
+					</li>
+					<li>Source code is located here:
+						<br/>
+						<pre><code>vagrant@workshop:~$ cd ~/workspace/catalogue</code></pre>
+					</li>
+				</ul>
+				<br>
+			</section>
+
+			<section>
+				<h2>Application Overview</h2>
+				<img data-src="images/aa-module3-setup.jpg" alt="module3 app overview" style="border:0">
+				<aside class="notes">
+					You can also use the host-only network address of 192.168.33.10 instead of localhost. We use port-forwarding in the Vagrantfile to allow use of localhost for some ports.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Deploy Catalogue Service in CI pipeline</h2>
+				<ul>
+					<li><a href="http://localhost:8153" target="_blank" title="http://localhost:8153">http://localhost:8153</a></li>
+					<img width="750" data-src="images/aa-module3-pipeline-start.png" alt="monolithic app overview" style="border:0">
+					<li>
+						View the service API docs in your browser:
+						<br/>
+						<a href="http://localhost:8084/api-docs" target="_blank">http://localhost:8084/api-docs</a>
+					</li>
+			</section>
+			</ul>
+			</section>
+
+			<section>
+				<h2>Deploy review service and app</h2>
+				<ul>
+					<li>Deploy the <code>review</code> service next (*)</li>
+					<li>Then deploy the <code>shop-app</code></li>
+					<li>View the app in your browser: <a href="http://localhost:8090" target="_blank">http://localhost:8090</a></li>
+					<li>Do you notice anything weird?</li>
+					<img width="800" data-src="images/aa-module3-broken-shop-app.jpg" alt="module3 broken shop-app" style="border:0">
+					<br/>
+					<small><li>(*) Due to limitations of Docker Links, there is some ordering imposed on the deployment of our app and services.	This will be addressed in Module 4.</li></small>
+				</ul>
+				<aside class="notes">
+					Docker Links require the target containers to be running before creating the links from the source container. You can restart the same containers and the links will be maintained. However, if you delete a container and then launch a new container it will
+					most likely have a new IP address and hence the links in the source container will be stale. You will then need to restart or redeploy the source container. Tools like docker compose assume you will launch everything together. This doens't fit well
+					into autonomous teams deploying independently. Service discovery techniques can address this problem.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Our journey today... </h2>
+				<br>
+				<ul>
+					<li>Monolithic shop app</li>
+					<li>Deploy shop app</li>
+					<li>Extract Review Service</li>
+					<li>Extract Catalogue Service</li>
+					<li>Consumer Driven Contracts</li>
+				</ul>
+			</br>
+			</section>
+
+			<section>
+				<div>
+					<h2>Consumer-driven Contracts</h2>
+				</div>
+				<ol>
+					<li class="fragment">Each consumer captures expectations of a provider in a separate contract</li>
+					<li class="fragment">Each consumer generates this contract during the test stage</li>
+				</ol>
+				<img class="fragment" width="800" data-src="images/aa-module3-pact-record.jpg" alt="CDC - record expectations of consumer" style="border:0">
+				<br/>
+				<aside class="notes">
+					Discuss build and deploy pipeline structure to support autonomous teams and service deployment
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<div>
+					<h2>Consumer-driven Contracts</h2>
+				</div>
+				<ol>
+					<li>Each consumer captures expectations of a provider in a separate contract</li>
+					<li>Each consumer generates this contract during the test stage</li>
+					<li class="fragment">Provider must comply to every contract and runs a verification test against all generated contracts</li>
+				</ol>
+				<img class="fragment" width="750" data-src="images/aa-module3-pact-replay.jpg" alt="CDC - Replay consumer expectation against provider and verify" style="border:0">
+				<br/>
+				<aside class="notes">
+					Discuss build and deploy pipeline structure to support autonomous teams and service deployment
+				</aside>
+			</section>
+
+			<section>
+				<h2>Consumer-driven Contracts</h2>
+				<img width="1400" data-src="images/extra-slides/ms-workshop.021.jpeg" alt="CDC - Replay consumer expectation against provider and verify" style="border:0">
+			</section>
+
+			<section data-transition="none">
+				<div>
+					<h2> Consumer-driven Contracts </h2>
+				</div>
+				<ol>
+					<li>Each consumer captures expectations of a provider in a separate contract</li>
+					<li>Each consumer generates this contract during the test stage</li>
+					<li>Provider must comply to every contract and runs a verification test against all generated contracts</li>
+					<li>We are using <a target="_blank" href="https://github.com/realestate-com-au/pact">pact library</a> to help us generate and verify these contracts</li>
+					<br>
+					<strong>Benefits:</strong>
+					<ul>
+						<li>No complex, slow and brittle integration tests</li>
+						<li>Helps the teams to stay more agile</li>
+						<li>Easier to make changes and also identify any potential consumer impacts</li>
+						<li>Faster reponses and reduces likelihood of flakey tests</li>
+					</ul>
+				</ol>
+				<aside class="notes">
+					Discuss build and deploy pipeline structure to support autonomous teams and service deployment
+				</aside>
+			</section>
+
+			<section>
+				<div>
+					<h2> CDC - Characteristics </h2>
+				</div>
+				<div style="text-align: left; font-size: 0.9em;"><em>[CDC] imbues providers with insight into their consumer obligations, and focuses service evolution around the delivery of the key business functionality demanded by consumers.</em> (<a href="http://martinfowler.com/articles/consumerDrivenContracts.html"
+							target="_blank">MartinFowler.com</a>)</div>
+				<br/>
+				<div style="text-align: left"><strong>Characteristics:</strong></div>
+				<ol>
+					<li>Allows services to evolve independently of each other and supports independent releasing of services</li>
+					<li>Increase service independence by sharing contracts, not types</li>
+					<li>Allows consumers to express and assert their expectations of a service/provider contract</li>
+					<li>Allows testing against a single producer in isolation leading to faster, more reliable tests than end-to-end tests</li>
+					<li>CDCs are a codified set of discussions about what a service API should look like</li>
+					<li>Failures are a trigger point to have conversations about how the API should evolve</li>
+				</ol>
+				<aside class="notes">
+					Discuss build and deploy pipeline structure to support autonomous teams and service deployment
+				</aside>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2> Challenge - Part 1/3</h2>
+				</div>
+				<br>
+				<h2>Generate contract from Shop-App</h2>
+				<ol>
+					<li>View Module 3 <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/module3/README.html">README</a> for detailed instructions</li>
+					<li>We will be using <a href="https://github.com/DiUS/pact-jvm" target="_blank">pact-jvm</a> (JVM version of <a href="https://github.com/realestate-com-au/pact" target="_blank">Pact</a>) to show that changes made to the <code>review</code> service have
+						broken the <code>shop-app</code></li>
+					<li>Generate the "pact file" for the <code>shop-app</code> consumer
+						<pre><code>vagrant@workshop:~ cd ~/workspace/shop-app</code></pre>
+						<pre><code>vagrant@workshop:shop-app$ ./ci.sh test</code></pre>
+				</ol>
+				<aside class="notes">
+					Pact file will be generated at target/pacts Do ls target/pacts to see the file
+				</aside>
+			</section>
+
+			<section>
+				<h2>ShopApp-ReviewService contract</h2>
+				<img width="1000" data-src="images/aa-module3-pactfile.jpg" alt="ShopApp-ReviewService.json pact file" style="border:0">
+				<br/>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2> Challenge - Part 2/3</h2>
+				</div>
+				<br>
+				<h2>Verify contract from Review Service</h2>
+				<ol>
+					<li>Copy the <a target=_blank href="../../my-workspace/shop-app/target/pacts/ShopApp-ReviewService.json">pact file</a> to the review service <code>pacts</code> directory:
+						<pre><code>vagrant@workshop:shop-app$ mkdir -p ~/workspace/review/pacts</code></pre>
+						<pre><code>vagrant@workshop:shop-app$ cp target/pacts/ShopApp-ReviewService.json ../review/pacts/</code></pre>
+						<li>Commit and push changes made to the <code>review</code> service to include the pact file</li>
+				</ol>
+				<aside class="notes">
+					In this exercise, we manually generate the pact file and check it into the review service. In the real world, you'd have the shop-app generate and publish the latest pact file on every commit to a known location (e.g. file share or Pact Broker, etc.).
+					Then you'd write up the review service to fetch that latest pact file on each and every build of the review service.
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2> Challenge - Part 2/3</h2>
+				</div>
+				<br>
+				<h2>Verify contract from Review Service</h2>
+				<ol>
+					<li>Edit the <code>review</code> service pipeline:</li>
+					<ul>
+						<li>Add a <code>ConsumerTests</code> stage and a <code>ConsumerTests</code> job</li>
+						<li>Under the job, add a <strong>task</strong> which executes the command:
+							<pre><code>./ci.sh pact_verify</code></pre></li>
+						<li>The <code>pact_verify</code> script exists in <code>review</code> service <code>scripts</code> directory</li>
+						<li>Trigger a new build of <code>review</code> service</li>
+						<li>The <code>ConsumerTests</code> stage should have failed (<span style="color: red">red</span>)</li>
+					</ul>
+				</ol>
+				<aside class="notes">
+					In this exercise, we manually generate the pact file and check it into the review service. In the real world, you'd have the shop-app generate and publish the latest pact file on every commit to a known location (e.g. file share or Pact Broker, etc.).
+					Then you'd write up the review service to fetch that latest pact file on each and every build of the review service.
+				</aside>
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2> Challenge - Part 3/3</h2>
+				</div>
+				<br>
+				<h2>Expose broken consumer via Pact</h2>
+				<li>View the console output for the <code>ConsumerTests</code> job:</li>
+				<img width="200" data-src="images/aa-module3-challenge1-failure.jpg" alt="cdc build failure" style="border:0">
+				<br/>
+				<li>Uh-oh, someone renamed <code>stars</code> to <code>starRatings</code>:</li>
+				<img width="650" data-src="images/aa-module3-challenge1-failure-reason.jpg" alt="cdc build failure reason" style="border:1">
+			</section>
+
+			<section>
+				<div>
+					<h2> Pact Overview - Consumer</h2>
+				</div>
+				<img width="1000" data-src="images/aa-pacts-1.jpg" alt="pact overview - client" style="border:0">
+			</section>
+
+			<section>
+				<div>
+					<h2> Pact Overview - Provider</h2>
+				</div>
+				<img width="1000" data-src="images/aa-pacts-2.jpg" alt="pact overview - client" style="border:0">
+			</section>
+
+			<section>
+				<div>
+					<h2>Pact Overview</h2>
+				</div>
+				<img width="1000" data-src="images/aa-pacts-3.jpg" alt="pact overview - client" style="border:0">
+			</section>
+
+			<section>
+				<div style="background-color: rgb(239, 91, 161) ; padding: 5px;">
+					<h2> Challenge </h2>
+				</div>
+				<br>
+				<h2>Fix review service so that the shop-app works again<br>
+					</h2>
+				<ol>
+					<li>View Module 3 <a target=_blank href="../tw-microservices-workshop/workshop-dist/topics/finish/module3/README.html">README</a> </li>
+					<li>Edit the file:
+						<pre><code>vagrant@workshop:$ cd ~/workspace/review
+vagrant@workshop:$ nano src/main/java/microservices/review/hateoas/StarRatingDto.java</code></pre></li>
+					<li>Search for the text <code>TODO</code> (2 occurrences)</li>
+					<li>Rename the field <code>starRatings</code> to <code>stars</code></li>
+					<li>Save changes; commit and push changes to trigger a build</pre>
+					</li>
+					<li>The <code>ReviewService</code> pipeline should become <span style="color: green">green</span></li>
+					<li>Trigger the <code>ReviewService-Deploy</code> pipeline - wait!</li>
+					<li>Then, trigger the <code>ShopApp-Deploy</code> pipeline (due to Docker links)</li>
+					<li>The <code>shop-app</code> should now be showing star ratings again!</li>
+				</ol>
+				<aside class="notes">
+					<pre>
+							1. Usually the provider would change whenever there is a change request from one of the consumers
+							2. Main intention of going for services is to support agility and reduce cost of change
+							2. If 'GET' endpoint, do not reduce (Do not drop any existing fields)
+							3. If 'POST' endpoint, add any new fields as optional (if that is possible)
+							4. If service has exposed client libraries, then CDC becomes redundant, but that is very difficult to maintain and tightly bounds to a particular technology
+						</pre>
+				</aside>
+			</section>
+
+			<section>
+				<div>
+					<h2> CDC References </h2>
+					<ul>
+						<li>
+							<span>Chapter	7 - <a href="http://shop.oreilly.com/product/0636920033158.do" target="_blank">Building Microservices (Book)</a>, Sam Newman</span>
+							<br/>
+							<img style="display: block; margin-left: auto; margin-right: auto;" width="240" data-src="images/aa-book-building-microservices.jpg" alt="Building Microservices" style="border: 0">
+						</li>
+						<li><a href="http://martinfowler.com/articles/consumerDrivenContracts.html" target="_blank">Consumer-Driven Contracts: A Service Evolution Pattern (Article)</a>, Ian Robinson</li>
+						<li><a href="http://www.slideshare.net/bethesque/pact-39214472" target="_blank">Pacts to the Rescue (Slides)</a>, Beth Skurrie</li>
+						<li><a href="https://github.com/realestate-com-au/pact" target="_blank">realestate-com-au/pact (Github repo)</a></li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div>
+					<h2> Module 3 - Wrap-up </h2>
+				</div>
+				<ol>
+					<li>Extracted 2nd microservice, <code>catalogue</code>, from <code>shop-app</code></li>
+					<li>Overview of how CDCs help to ensure providers know about and do not break consumer expectations</li>
+					<li>CDCs allow autonomous teams and independent releasing of services</li>
+					<li>Use of <code>pact</code> library for implementing CDCs</li>
+					<li>Introduction to private Docker registry for publishing internal Docker images</li>
+				</ol>
+			</section>
+
+			<section>
+				<div>
+					<h2> Module 3 - Tips and Advice </h2>
+					<ol>
+						<li>Use CDCs to reduce the reliance of heavy end-to-end or large-scale integration testing</li>
+						<li>Pact is a great tool for implementing CDCs for Ruby, .NET, and JVM languages</li>
+						<li>Have consumer CI builds generate pact files as artifacts on every check-in</li>
+						<li>Have service providers consume pact file artifacts on every provider CI build</li>
+						<li>Avoid coupling service provider pipelines directly to consumer pipelines</li>
+						<li>Use an external artifact store or the <a href="https://github.com/bethesque/pact_broker" target="_blank">Pact Broker</a></li>
+					</ol>
+			</section>
+
+
+			<!-- Module 4 -->
+
+			<section id="wrap-up" class="title">
+				<h1>Wrap Up</h1>
+				<h3>Service discovery, operational concerns and future trends</h3>
+			</section>
+
+			<section>
+						<img width="1400" data-src="images/Observables/Observables.003.jpeg" alt="Observable Microservices" style="border:0">
+			</section>
+
+			<section>
+						<img width="1400" data-src="images/Observables/Observables.005.jpeg" alt="Observable Microservices" style="border:0">
+			</section>
+
+
+			<section>
+				<h2>Discovering Services using<br/>Consul + Registrator</h2>
+				<ul>
+					<li><a href="https://www.consul.io/">Consul</a> is a tool for service discovery and configuration. It is designed to be distributed and highly-available.</li>
+					<ul>
+						<li>Consul provides both <a href="https://www.consul.io/docs/agent/http.html">HTTP REST API</a> and <a href="https://www.consul.io/docs/agent/dns.html">DNS interfaces</a> for looking up services</li>
+						<li>Updates are made via the REST API</li>
+					</ul>
+					<br>
+					<li><a href="https://github.com/gliderlabs/registrator">Registrator</a> is a service registry bridge for Docker
+						<br/>
+						<em style="display: inline-block; margin: 20px 0 20px 0; font-family: 'Open Sans Light', Helvetica, sans-serif;">"Registrator automatically register/deregisters services for Docker containers based on published ports and metadata from the container environment" [1]</em>
+					</li>
+					<ul>
+						<li>Registrator helps us automate registering our services without needing to explicitly add registration code to talk to the Consul REST API</li>
+					</ul>
+					<p style="text-align: left; font-size: 0.6em">[1] <a href="https://github.com/gliderlabs/registrator">https://github.com/gliderlabs/registrator</a></p>
+				</ul>
+			</section>
+			<section>
+									<img width="1400" data-src="images/Observables/Observables.006.jpeg" alt="Observable Microservices" style="border:0">
+						</section>
+			<section>
+				<h2>Production Environments</h2>
+				<ul>
+					<li>A real-world production environment does not usually consist of a single host running the application and services</li>
+					<li><strong>We want to:</strong>
+						<ul>
+							<li>Reduce single points of failure in the system</li>
+							<li>Increase availability of our applications and services
+								<li>Horizontally scale our applications and services</li>
+						</ul>
+						</li>
+						<li><strong>We can do this by:</strong>
+							<ul>
+								<li>Running multiple instances of each application/service behind load-balancers</li>
+								<li>Distributing our instances across multiple hosts</li>
+							</ul>
+						</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Production Setup</h2>
+				<img width="900" data-src="images/aa-module4-multihost-arch.jpg" alt="module4 multihost high-level arch" style="border:0">
+				<aside class="notes">
+					The load-balancers here can be considered virtual LBs. Usually, you will run redundant multiple redundant LBs behind a virtual IP for high-availability. How do you map service processes to servers? You could statically assign them to hosts. If we have
+					a scheduling mechanism for the cluster we would not need to care specifically where the apps + services were running - we only care about constraints (e.g. run 2+ of these or don't run thse on the same host, etc.)
+				</aside>
+			</section>
+
+			<section>
+				<h2>Multi-Host Deployment with<br/>Docker Swarm</h2>
+				<ul>
+					<li>Our <code>shop-app</code> and services run inside Docker containers</li>
+					<li>How can we deploy our Docker containers across multiple hosts?
+						<ul>
+							<li>The Docker engine running on a host can only manage containers on it's host</li>
+							<li>We need some kind of Docker-aware clustering system</li>
+						</ul>
+						<li><a href="https://docs.docker.com/swarm/" target="_blank">Docker Swarm</a> is one possible solution to this problem
+							<ul>
+								<li>It provides native clustering for Docker</li>
+								<li>It abstracts a pool of Docker hosts into a single, virtual host</li>
+								<li>It presents the standard Docker API - meaning you can use existing tools, like the <code>docker</code> command-line client, to manage the cluster</li>
+								<li>It is a "batteries included" solution but allows for swapping in more powerful backends</li>
+							</ul>
+						</li>
+					</li>
+				</ul>
+				<aside class="notes">
+					Other Docker Swarm backends include Kubernetes and Mesos.
+				</aside>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker Swarm</h2>
+				</div>
+				<img width="900" data-src="images/aa-module4-swarm-cluster.jpg" alt="docker swarm" style="border:0" />
+				<br/>
+				<aside class="notes">
+					Normally, you'd run the swarm manager on a different host to the swarm node - we do that here to reduce the number of VMs we need to run for the workshop. Currently, as of v0.2.0, Docker Swarm does not support high-availability with fail-over for the
+					Swarm Manager - this is planned for a future release.
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<div>
+					<h2>Docker Swarm</h2>
+				</div>
+				<img width="900" data-src="images/aa-module4-swarm-node-manager.jpg" alt="docker swarm" style="border:0" />
+				<br/>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker Swarm - Binpack Strategy</h2>
+				</div>
+				<img width="900" data-src="images/aa-module4-swarm-cluster-binpack.jpg" alt="docker swarm" style="border:0" />
+				<br/>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker Swarm - Spread Strategy</h2>
+				</div>
+				<img width="900" data-src="images/aa-module4-swarm-cluster-spread.jpg" alt="docker swarm" style="border:0" />
+				<br/>
+			</section>
+
+			<section>
+				<div>
+					<h2>Docker Swarm - Deploy with constraints</h2>
+				</div>
+				<img width="900" data-src="images/aa-module4-swarm-cluster-constraints.jpg" alt="docker swarm" style="border:0" />
+				<br/>
+			</section>
+			<section>
+								<img width="1400" data-src="images/Observables/Observables.007.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+					<section>
+								<img width="1400" data-src="images/Observables/Observables.008.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+					<section>
+								<img width="1400" data-src="images/Observables/Observables.009.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+					<section>
+								<img width="1400" data-src="images/Observables/Observables.010.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+
+			<section>
+				<h2>Hierarchical Correlation IDs</h2>
+				<ul>
+					<img width="" data-src="images/aa-module5-correlation-ids.jpg" alt="module5 kibana error 1" style="border:0" />
+					<br/>
+				</ul>
+			</section>
+			<section>
+								<img width="1400" data-src="images/Observables/Observables.011.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+					<section>
+								<img width="1400" data-src="images/Observables/Observables.013.jpeg" alt="Observable Microservices" style="border:0">
+					</section>
+
+			<section>
+				<h2>Monitoring System</h2>
+				<ul>
+					<li>Look at <a href="http://prometheus.io/" target="_blank">Prometheus</a> as an example for a monitoring and metrics solution</li>
+					<li>Prometheus uses a pull model over HTTP to collect metrics* in a special format</li>
+					<li>You can either directly instrument your services using one of the provided <a href="http://prometheus.io/docs/instrumenting/clientlibs/" target="_blank">client libraries</a> or use one of the metrics <a href="http://prometheus.io/docs/instrumenting/exporters/"
+								target="_blank">exporters</a></li>
+					<li>When running multiple containers we do not want to couple the monitoring server to each container's health/metrics endpoint</li>
+					<li>Consul supports <a href="https://www.consul.io/intro/getting-started/checks.html" target="_blank">checking health status</a> on services - our services are already known to Consul (via Registrator)</li>
+					<li>We can make use of the <a href="https://github.com/prometheus/consul_exporter" target="_blank">Consul Exporter</a> to get our service health checks out of Consul and into Prometheus</li>
+					<small style="padding-top : 20px">(*) A <a href="http://prometheus.io/docs/instrumenting/pushing/" target="_blank">push model</a> is supported via an intermediary gateway</small>
+				</ul>
+				<aside class="notes">
+					A push model can be easier to sertup and less intrusive as it does not require your services to run scripts for pushing data to a central server.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Consul Server Healthchecks</h2>
+				<ul>
+					<img width="" data-src="images/aa-module5-consul-healthchecks.jpg" alt="module5 consul healthchecks" style="border:0" />
+					<br/>
+				</ul>
+			</section>
+
+
+			<section>
+				<h2>Prometheus Alerts</h2>
+				<ul>
+					<img width="" data-src="images/aa-module5-alerts.jpg" alt="module5 kibana error 1" style="border:0" />
+					<br/>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Prometheus Ad-hoc Metric Graphs</h2>
+				<ul>
+					<img width="" data-src="images/aa-module5-graph-metrics.jpg" alt="module5 graph metrics" style="border:0" />
+					<br/>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Operations Dashboards</h2>
+				<ul>
+					<li>Once we start to have many sources of useful information (e.g. monitoring, metrics, graphs, etc) it becomes difficult to consume</li>
+					<li>A visual dashboard provides a summary of important information from different sources at a glance</li>
+					<li>What is the most useful information we should know about right now?</li>
+					<li>Candidates:
+						<ul>
+							<li><strong>Application health and status</strong> - are our apps and services up?</li>
+							<li><strong>Error counts and trends</strong></li>
+							<li><strong>Resource usage and trends</strong> - can we identify problems before they occur?</li>
+							<li><strong>Overall available capacity</strong> - disk, CPU, memory, network bandwidth</li>
+							<li><strong>Number of deploys, deployed versions, response times</strong>, etc.</li>
+							<li><strong>Business metrics</strong> - signups, purchases, click-throughs, etc.</li>
+						</ul>
+					</li>
+				</ul>
+				<aside class="notes">
+					We mashup dashboards from sources like Graphite, Kibana/Logstash, Prometheus, etc. Some tools, like PromDash provide ways to build custom dashboards without writing code. Other tools, like Dashing framework allow you to create your own custom dashboards
+					by writing code.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Tips and Advice</h2>
+				<ol>
+					<li>When scaling container-based services it becomes impractical to map each instance of a container statically to specific hosts - use service discovery</li>
+					<li>Use Docker Swarm as your cluster manager with the default scheduling backend - other backends are only needed for very large-scale operations</li>
+					<li>Use a private discovery backend like Consul - do not use the publicly hosted discovery service</li>
+					<li>Use load-balancers - like HAProxy - to scale your services</li>
+					<li>Use load-balancer endpoints for service discovery not individual service instances</li>
+					<li>Ensure your services provide healthcheck endpoints so that load-balancers can stop routing traffic to unhealthy instances</li>
+					<li>Ensure your load-balancers are not a single-point of failure</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Tips and Advice cont.</h2>
+				<ol>
+					<li>Log aggregation, monitoring and other operational concerns should be planned into development work early on - not bolted on as an afterthought</li>
+					<li>Standardise on healthcheck, metrics and other endpoints for your services to simplify monitoring configuration</li>
+					<li>Standardise on log structure and formats to help in log aggregation and analysis tasks</li>
+					<li>Implement <a href="http://www.thoughtworks.com/radar/techniques/semantic-monitoring" target="_blank">semantic monitoring</a> by running key user journeys in Production with synthetic transactions</li>
+					<li>Build custom dashboards for specific audiences that summarise the most important information they care about</li>
+					<li>Make dashboards visible, e.g. display on a big TV screen or project onto the wall</li>
+					<li>Get development and operations people working together</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>First Steps</h2>
+				<span>Congratulations!	You've made it to the end :)</span>
+				<br/>
+				<p>
+					<h4>What now?</h4>
+					<ol>
+						<li>Go back over the workshop material on your own: scripts, CD pipeline configuration, the source code for the app, services, etc.</li>
+						<li>Read through the linked references (in the slides and READMEs)</li>
+					</ol>
+				</p>
+				<p>
+					<h4>Start small...</h4>
+					<ol>
+						<li>Extract or build a small, low-risk service first</li>
+						<li>Dockerise your service</li>
+						<li>Start with a single Docker host and automate everything needed to build it from scratch</li>
+						<li>Setup your own basic CD pipeline to deploy your service to production</li>
+					</ol>
+				</p>
+			</section>
+			<section>
+				<h2>Continous Delivery</h2>
+				<img width="1400" data-src="images/extra-slides/ms-workshop.038.jpeg" alt="module6 - next steps" style="border:0">
+			</section>
+
+			<section>
+				<h2>Products, not Projects</h2>
+				<img width="1400" data-src="images/extra-slides/ms-workshop.039.jpeg" alt="module6 - next steps" style="border:0">
+			</section>
+
+			<section>
+				<h2>Next Steps...</h2>
+				<span>Successful adoption of Microservices depends on some <a href="http://martinfowler.com/bliki/MicroservicePrerequisites.html" target="_blank">prerequisites</a> like rapid server provisioning, basic monitoring, automated deployment pipelines, and embracing a DevOps culture</span>
+				<br/>
+				<p>
+					<h4>Advice</h4>
+					<ol>
+						<li>Get log aggregation and monitoring in place early</li>
+						<li>Only look at a cluster management once when you understand Docker and it's edge-cases properly</li>
+						<li>You probably won't need advanced schedulers like Mesos and Kubernetes for your Enterprise apps just yet - use Docker Swarm with it's "batteries included" to start with</li>
+						<li><strong>WARNING</strong>: Docker is still evolving and the ecosystem is immature
+							<ul>
+								<li>Avoid being locked into a technology which is too intrusive or too opinionated</li>
+								<li>If it's the wrong choice it's hard to back out; let the dust settle, see which front-runners emerge</li>
+							</ul>
+						</li>
+					</ol>
+				</p>
+			</section>
+
+			<section>
+				<h2>Future Trends</h2>
+				<p>
+					<h4>Continuous Delivery</h4>
+					<ol>
+						<li>Continuous Delivery becoming the normal way of doing business</li>
+						<li>Long-lived, cross-functional, product-aligned teams who own the entire software lifecycle</li>
+						<li>DevOps culture</li>
+					</ol>
+				</p>
+				<p>
+					<h4>Microservices</h4>
+					<ol>
+						<li>Use of lightweight SOA within an organisation - moving away from heavyweight ESBs</li>
+						<li>Teams share business functions via well-defined service-oriented APIs - not shared libraries</li>
+						<li>Decentralised governance: Teams can use the right tool for the job rather than being forced to use some Enterprise-wide standard</li>
+						<li><a href="http://www.thoughtworks.com/insights/blog/scaling-microservices-event-stream" target="_blank">Event-driven architectures</a> - business process integration via choreography over orchestration</li>
+					</ol>
+				</p>
+				<aside class="notes">
+					Decentralised governance: It makes sense to standardise on some cross-cutting concerns like logging, security, monitoring, etc. Event-driven architectures: Loose coupling, more scalable, better handling of failures - retry/resume business process; AWS
+					Lambda
+				</aside>
+			</section>
+
+			<section>
+				<h2>Future Trends</h2>
+				<p>
+					<h4>Docker / Application Containers</h4>
+					<ul>
+						<li>Rise of lightweight-containers over full virtualisation (VMs)</li>
+						<li>Container schedulers as building blocks for more advanced use-cases</li>
+						<li>Service discovery via DNS</li>
+						<li>Docker alternatives: e.g. App Container spec - <a href="https://github.com/coreos/rkt" target="_blank">rkt</a>; <a href="http://www.ubuntu.com/cloud/tools/lxd" target="_blank">LXD</a>; Microsoft <a href="http://research.microsoft.com/en-us/projects/drawbridge/"
+									target="_blank">Drawbridge</a></li>
+						<li>Docker Machine, Docker Compose, Docker Swarm</li>
+						<li>Docker Networking improvements: overlay-networking, Docker libnetwork</li>
+					</ul>
+				</p>
+				<aside class="notes">
+					Container schedulers: Kubernetes, Mesos Overlay-networking: flannel, weave, libnetwork Service discovery: Consul, Registrator, SkyDNS, WeaveDNS, etc.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Future Trends</h2>
+				<p>
+					<h4>Virtualisation and Cloud</h4>
+					<ul>
+						<li>Cloud uptake continues to grow and adoption becomes the norm</li>
+						<li>Changing architectures: Horizontal scaling, event-driven, microservices, design for failure, optimise for MTTR (mean-time to recover) over MTBF (mean-time between failures)</li>
+						<li>SDN (Software-Defined Networking) and NFV (Network Function Virtualisation)</li>
+						<li>Storage virtualisation and services</li>
+					</ul>
+				</p>
+				<aside class="notes">
+					Rise of lightweight-containers over full virtualisation (VMs) - everyone is jumping onto the bandwagon: Google, IBM, RedHat, VMware, Intel, CoreOS, AWS, even Microsoft! Containerisation: Docker - and on Windows!, appc, Hyper-V Containers (Windows), etc.
+					MTTR: Simian army - Netflix Storage virtualisation and services - AWS: S3, DynamoDB, EBS, RDS, Redshift; Ceph, GlusterFS
+				</aside>
+			</section>
+
+			<section>
+				<h2>Future Trends</h2>
+				<p>
+					<h4>Other related trends</h4>
+					<ol>
+						<li>Shift to commodity hardware and software-based functions over specialised hardware appliances</li>
+						<li>Open-source is the leading edge: Commercially-funded open-source model with paid versions packaged extra features or premium support</li>
+						<li>Immutable infrastructure: baked VM images (AMIs), container images, rebuild - not update</li>
+						<li>Lightweight and atomically updatable OSes for microservice/container use-cases</li>
+					</ol>
+				</p>
+				<aside class="notes">
+					Commercially-funded open-source model: Mesosphere, OpenShift v3, Kismatic, etc. Lightweight OSes: CoreOS, RHEL Atomic Host, Snappy Ubuntu Core, VMware Photon, Intel ClearLinux, Windows Nano Server, etc.
+				</aside>
+			</section>
+
+			<section>
+				<h2> The End </h2>
+			</section>
+
+			<!-- END OF TUTORIAL SLIDES -->
+
+			</div>
+			</div>
+
+			<script src="lib/js/head.min.js"></script>
+			<script src="js/reveal.js"></script>
+
+			<script>
+				// Full list of configuration options available at:
+				// https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
+					hideAddressBar: true,
+
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+					// Optional reveal.js plugins
+					dependencies: [{
+						src: 'lib/js/classList.js',
+						condition: function() {
+							return !document.body.classList;
+						}
+					}, {
+						src: 'plugin/markdown/marked.js',
+						condition: function() {
+							return !!document.querySelector('[data-markdown]');
+						}
+					}, {
+						src: 'plugin/markdown/markdown.js',
+						condition: function() {
+							return !!document.querySelector('[data-markdown]');
+						}
+					}, {
+						src: 'plugin/highlight/highlight.js',
+						async: true,
+						condition: function() {
+							return !!document.querySelector('pre code');
+						},
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					}, {
+						src: 'plugin/zoom-js/zoom.js',
+						async: true
+					}, {
+						src: 'plugin/notes/notes.js',
+						async: true
+					}]
+				});
+			</script>
+
+</body>
+
+</html>

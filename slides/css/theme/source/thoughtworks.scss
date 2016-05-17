@@ -1,0 +1,97 @@
+/**
+ * White theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * Copyright (C) 2015 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+//@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/open-sans/open-sans.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+//$mainColor: #222;
+$mainColor: rgb(37, 56, 60);
+$headingColor: #222;
+
+$mainFontSize: 38px;
+$mainFont: 'Open Sans Light', Helvetica, sans-serif;
+$headingFont: 'Open Sans', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #2a76dd;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+.green {
+  color: rgb(181, 185, 53);
+}
+
+.pink {
+  color: rgb(239, 91, 161);
+}
+
+section.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #fff;
+	}
+}
+
+section.title h1 {
+  color: rgb(239, 91, 161);
+  font-size: 100px;
+  font-family: 'Open Sans Bold';
+  text-align: left;
+  padding-bottom: 50px;
+  border-bottom: 1px solid black;
+  line-height: 1;
+}
+
+section.title h3 {
+  color: rgb(106, 37, 105);
+  font-style: italic;
+  font-family: 'Open Sans';
+  font-size: 40px;
+  font-weight: 100;
+  text-align: left;
+  text-transform: none;
+}
+
+section.h4 {
+  color: rgb(181, 185, 53);
+}
+
+img.no-border {
+  border:0;
+}
+
+li {
+  list-style: none;
+  //margin-top: 5em;
+  //margin-bottom: 5em;
+}
+
+li:before {
+  content: "◼  ︎";
+  color: rgb(181, 185, 53);
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
